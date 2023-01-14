@@ -44,7 +44,6 @@ module.exports = class extends Table {
             this.config({
                 "rules":     "rows",
 	        "rowHeight": "0.8rem",
-		"align":     ["center","left","left"],
             });
         } catch (e) {
             console.error(e.stack);
@@ -168,6 +167,7 @@ module.exports = class extends Table {
             
             row_index++;
             this.confmng('row-index', row_index);
+
             super.insert(add_row_comps);
 	} catch (e) {
             console.error(e.stack);
