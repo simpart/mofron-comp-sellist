@@ -50,8 +50,7 @@ module.exports = class extends Table {
             throw e;
         }
     }
-
-
+    
     head (prm, cnf) {
         try {
 	    if (undefined === prm) {
@@ -95,7 +94,7 @@ module.exports = class extends Table {
                 let ret   = [];
                 let conts = this.confmng('contents');
                 for (let cidx in conts) {
-                    ret.push(conts[cidx][0].check());
+                    ret.push(conts[cidx][0].checked());
                 }
                 return ret;
 	    }
