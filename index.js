@@ -28,6 +28,7 @@ module.exports = class extends Table {
 	    /* init config */
             this.confmng().add('row-index',   { type: 'number', init: 0 });
             this.confmng().add("accentColor", { type: "color", init: [120,133,205]})
+	    this.confmng().add('selectEvent', { type: 'event', list:true });
             
 	    if (0 < arguments.length) {
                 this.config(p1);
@@ -101,13 +102,12 @@ module.exports = class extends Table {
 	    /* switching row color */
             let tr_dom = this.confmng('contents')[idx][0].rootDom()[0].parent().parent();
             let speed  = (true === flg) ? '300' : '200';
-            //let bg_clr = (true === flg) ? this.accentColor() : this.baseColor();
 	    
             tr_dom.style({
                 'transition': 'background '+ speed +'ms 120ms ease',
                 'background': (true === flg) ? this.accentColor() : this.baseColor()
             });
-
+            
             /* invert text color */
 	    let conts = this.confmng('contents')[idx];
 	    for (let cidx=1;cidx < conts.length;cidx++) {
@@ -115,10 +115,28 @@ module.exports = class extends Table {
 	    }
 	    /* change checkbox */
 	    this.confmng('contents')[idx][0].checked(flg);
+
+            /* execute select event */
+            let evt = this.selectEvent();
+            for (let eidx in evt) {
+                evt[eidx][0](this, this.select(), evt[eidx][1]);
+            }
 	} catch (e) {
             console.error(e.stack);
             throw e;
         }
+    }
+
+    selectEvent (fnc,prm) {
+        try {
+            return this.confmng(
+	               'selectEvent',
+		       (undefined === fnc) ? fnc : [fnc,prm]
+		   );
+	} catch (e) {
+            console.error(e.stack);
+            throw e;
+	}
     }
     
     insert (prm) {
