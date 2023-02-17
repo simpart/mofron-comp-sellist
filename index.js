@@ -73,7 +73,7 @@ module.exports = class extends Table {
 	    }
 	    let add_head = [
                 new Check({
-                    style: { 'width': '0.16rem', 'margin': 'auto' },
+                    style: { 'margin':'auto' },
                     changeEvent: new ConfArg(chkbx_chg,this),
                 })
             ];
@@ -95,7 +95,9 @@ module.exports = class extends Table {
                 let ret   = [];
                 let conts = this.confmng('contents');
                 for (let cidx in conts) {
-                    ret.push(conts[cidx][0].checked());
+		    if (true === conts[cidx][0].checked()) {
+                        ret.push(parseInt(cidx));
+		    }
                 }
                 return ret;
 	    }
@@ -158,7 +160,7 @@ module.exports = class extends Table {
             let row_index     = this.confmng('row-index');
             let add_row_comps = [
                 new Check({
-                    style: { 'width': '0.16rem', 'margin': 'auto' },
+                    style: { 'margin': 'auto' },
                     changeEvent: new ConfArg(chkbx_chg,this),
                     data: new ConfArg('row-index', row_index)
                 })

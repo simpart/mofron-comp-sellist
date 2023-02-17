@@ -1,6 +1,6 @@
 {
   "name": "mofron-comp-sellist",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "select list component for mofron",
   "main": "index.js",
   "scripts": {
